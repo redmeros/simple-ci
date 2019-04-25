@@ -65,7 +65,7 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 	saveBodyToFile(body)
 
 	if err != nil {
-		log.Fatal("Cannot read from body...")
+		log.Fatal("Cannot read from body....")
 	}
 
 	verifiedHash := verifyBodySignature(r.Header.Get("X-Hub-Signature"), body)

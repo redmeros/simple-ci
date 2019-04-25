@@ -25,3 +25,11 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Project specific
+
+# env file
+.env
+# main binary
+simple-ci
+*.bin

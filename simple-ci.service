@@ -1,0 +1,13 @@
+# /etc/systemd/system/simple-ci.service
+[Unit]
+Description=Simple-ci service for github webhooks
+After=network.target
+
+[Install]
+WantedBy=multi-user.target
+Alias=simple-ci.service
+
+[Service]
+Type=simple
+ExecStart=/home/mr/go/src/github.com/redmeros/simple-ci/simple-ci
+ExecStop=/bin/kill -HUP $MAINPID

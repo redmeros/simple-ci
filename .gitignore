@@ -33,3 +33,5 @@
 # main binary
 simple-ci
 *.bin
+request.body.bin.json
+gin-bin

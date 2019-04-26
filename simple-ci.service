@@ -9,5 +9,5 @@ Alias=simple-ci.service
 
 [Service]
 Type=simple
-ExecStart=/home/mr/go/src/github.com/redmeros/simple-ci/simple-ci
+ExecStart=PATH-TO-BINARY
 ExecStop=/bin/kill -HUP $MAINPID

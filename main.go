@@ -151,11 +151,28 @@ func forbidden(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(403)
 }
 
-func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading env file")
+func checkVariables() bool {
+	result := true
+	vars := [...]string{"GITHUBUSERNAME", "GITHUBSECRET", "PORT", "SCRIPTS_DIR"}
+
+	for _, v := range vars {
+		if os.Getenv(v) == "" {
+			log.Printf("Env variable %s is not set", v)
+			result = false
+		}
 	}
+	return result
+}
+
+func main() {
+	godotenv.Load()
+
+	if checkVariables() == false {
+		log.Println("Set variables and run again...")
+		log.Println("exiting")
+		return
+	}
+
 	port := os.Getenv("PORT")
 
 	r := mux.NewRouter()
@@ -165,7 +182,7 @@ func main() {
 	address := fmt.Sprintf(":%s", port)
 	log.Printf("Listening on %s", address)
 
-	err = http.ListenAndServe(address, r)
+	err := http.ListenAndServe(address, r)
 	if err != nil {
 		log.Fatal("Listen and serve: ", err)
 	}
